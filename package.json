@@ -1,0 +1,30 @@
+{
+  "name": "controllers",
+  "description": "controllers",
+  "version": "0.0.1",
+  "author": "si@ibrokethat.com",
+  "contributors": [
+    { "name": "Simon Jefford", "email": "si@ibrokethat.com" }
+  ],
+  "dependencies": {
+    "registry": "git+ssh://git@github.com:ibrokethat/registry"
+  },
+  "devDependencies": {
+    "mocha": "1.2.x",
+    "sinon": "1.3.x"
+  },
+  "keywords": ["ibrokethat", "controllers", "controllers"],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ibrokethat/controllers"
+  },
+  "ibrokethat": {
+    "buildClient": true
+  },
+  "main": "controllers.js",
+  "scripts": {
+    "prepublish" : "npm prune",
+    "test": "mocha -u bdd"
+  },
+  "engines": { "node": "*" }
+}
