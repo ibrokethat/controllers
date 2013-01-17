@@ -6,14 +6,23 @@ var registry = require("registry");
 
 exports.controller = function (func, e) {
 
-  e.preventDefault();
+  try {
 
-  var boundObject = registry.get(e.currentTarget.getAttribute("data-id"));
-  var targetObject = e.delegateTarget.getAttribute("data-id");
+    e.preventDefault();
 
-  targetObject = targetObject ? registry.get(targetObject) : false;
+    var boundObject = registry.get(e.currentTarget.getAttribute("data-id"));
+    var targetObject = e.delegateTarget.getAttribute("data-id");
 
-  func(e, boundObject, targetObject);
+    targetObject = targetObject ? registry.get(targetObject) : false;
+
+    func(e, boundObject, targetObject);
+
+  }
+  catch (e) {
+
+    console.error(e);
+
+  }
 
 }
 
