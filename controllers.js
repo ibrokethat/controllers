@@ -10,8 +10,9 @@ exports.controller = function (func, e) {
 
     e.preventDefault();
 
-    var boundObject = registry.get(e.currentTarget.getAttribute("data-id"));
-    var targetObject = e.delegateTarget.getAttribute("data-id");
+    var attr = "data-id";
+    var boundObject = registry.get(e.currentTarget.getAttribute(attr));
+    var targetObject = e.delegateTarget.getAttribute(attr);
 
     targetObject = targetObject ? registry.get(targetObject) : false;
 
@@ -42,7 +43,9 @@ exports.remove = function (relation, e, object) {
 }
 
 exports.copy = function (relation, e, object, model) {
+
   object[relation] = model.clone();
+
 }
 
 
