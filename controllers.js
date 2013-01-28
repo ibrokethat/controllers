@@ -2,28 +2,27 @@
   @desc  controller
 */
 var registry = require("registry");
-
+var typeOf   = require("is").typeOf;
 
 exports.controller = function (func, e) {
 
-  try {
+  // try {
 
     e.preventDefault();
 
-    var attr = "data-id";
-    var boundObject = registry.get(e.currentTarget.getAttribute(attr));
-    var targetObject = e.delegateTarget.getAttribute(attr);
+    var boundObject = registry.get(e.currentTarget.dataset.id);
+    var targetObject = (e.delegateTarget || e.target).dataset.id;
 
     targetObject = targetObject ? registry.get(targetObject) : false;
 
     func(e, boundObject, targetObject);
 
-  }
-  catch (e) {
+  // }
+  // catch (e) {
 
-    console.error(e);
+  //   console.log(e);
 
-  }
+  // }
 
 }
 
@@ -50,9 +49,11 @@ exports.copy = function (relation, e, object, model) {
 
 
 //  hasMany bindings
-exports.createInCollection = function (Model, relation, e, object) {
+exports.createInCollection = function (Model, relation, initData, e, object) {
 
-  object[relation].add(Model.spawn());
+  initData = typeOf("function", initData) ? initData(e) : false;
+
+  object[relation].add(Model.spawn(initData));
 
 }
 
